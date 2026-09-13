@@ -1,0 +1,52 @@
+[
+  {
+    "id": "db-urban-shock-mw",
+    "name": "StatTrak\u2122 Dual Berettas | Urban Shock",
+    "wear": "Minimal Wear",
+    "category": "Pistol",
+    "rarity": "Restricted",
+    "rarityKey": "restricted",
+    "appid": 730,
+    "marketHashName": "StatTrak\u2122 Dual Berettas | Urban Shock (Minimal Wear)"
+  },
+  {
+    "id": "db-hydro-strike-mw",
+    "name": "StatTrak\u2122 Dual Berettas | Hydro Strike",
+    "wear": "Minimal Wear",
+    "category": "Pistol",
+    "rarity": "Restricted",
+    "rarityKey": "restricted",
+    "appid": 730,
+    "marketHashName": "StatTrak\u2122 Dual Berettas | Hydro Strike (Minimal Wear)"
+  },
+  {
+    "id": "sg553-tiger-moth-mw",
+    "name": "StatTrak\u2122 SG 553 | Tiger Moth",
+    "wear": "Minimal Wear",
+    "category": "Rifle",
+    "rarity": "Restricted",
+    "rarityKey": "restricted",
+    "appid": 730,
+    "marketHashName": "StatTrak\u2122 SG 553 | Tiger Moth (Minimal Wear)"
+  },
+  {
+    "id": "scar20-powercore-mw",
+    "name": "StatTrak\u2122 SCAR-20 | Powercore",
+    "wear": "Minimal Wear",
+    "category": "Rifle",
+    "rarity": "Restricted",
+    "rarityKey": "restricted",
+    "appid": 730,
+    "marketHashName": "StatTrak\u2122 SCAR-20 | Powercore (Minimal Wear)"
+  },
+  {
+    "id": "p250-cyber-shell-fn",
+    "name": "StatTrak\u2122 P250 | Cyber Shell",
+    "wear": "Factory New",
+    "category": "Pistol",
+    "rarity": "Restricted",
+    "rarityKey": "restricted",
+    "appid": 730,
+    "marketHashName": "StatTrak\u2122 P250 | Cyber Shell (Factory New)"
+  }
+]

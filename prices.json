@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-09-12T00:00:00.000Z",
+  "currency": "EUR",
+  "note": "Placeholder seed data (rough EUR conversion) so the page shows something before the GitHub Action runs for the first time. Run the workflow once manually to replace this with real, directly-fetched EUR prices.",
+  "items": [
+    { "id": "db-urban-shock-mw",   "name": "StatTrak™ Dual Berettas | Urban Shock",  "wear": "Minimal Wear", "category": "Pistol", "rarity": "Restricted", "rarityKey": "restricted", "priceValue": 14.77, "lowestPriceRaw": "14,77€", "medianPrice": null, "volume": null, "fetchedAt": "2026-09-12T00:00:00.000Z", "ok": true },
+    { "id": "db-hydro-strike-mw",  "name": "StatTrak™ Dual Berettas | Hydro Strike", "wear": "Minimal Wear", "category": "Pistol", "rarity": "Restricted", "rarityKey": "restricted", "priceValue": 4.57,  "lowestPriceRaw": "4,57€",  "medianPrice": null, "volume": null, "fetchedAt": "2026-09-12T00:00:00.000Z", "ok": true },
+    { "id": "sg553-tiger-moth-mw", "name": "StatTrak™ SG 553 | Tiger Moth",          "wear": "Minimal Wear", "category": "Rifle",  "rarity": "Restricted", "rarityKey": "restricted", "priceValue": 5.11,  "lowestPriceRaw": "5,11€",  "medianPrice": null, "volume": null, "fetchedAt": "2026-09-12T00:00:00.000Z", "ok": true },
+    { "id": "scar20-powercore-mw", "name": "StatTrak™ SCAR-20 | Powercore",          "wear": "Minimal Wear", "category": "Rifle",  "rarity": "Restricted", "rarityKey": "restricted", "priceValue": 5.29,  "lowestPriceRaw": "5,29€",  "medianPrice": null, "volume": null, "fetchedAt": "2026-09-12T00:00:00.000Z", "ok": true },
+    { "id": "p250-cyber-shell-fn", "name": "StatTrak™ P250 | Cyber Shell",           "wear": "Factory New",  "category": "Pistol", "rarity": "Restricted", "rarityKey": "restricted", "priceValue": 5.85,  "lowestPriceRaw": "5,85€",  "medianPrice": null, "volume": null, "fetchedAt": "2026-09-12T00:00:00.000Z", "ok": true }
+  ]
+}

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Inventory — Steam Community Market prices</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #14171c;
+    --panel: #1c2029;
+    --panel-border: #2a2f3a;
+    --panel-hover: #21262f;
+    --text: #ece9e2;
+    --text-dim: #9096a1;
+    --text-faint: #5c626e;
+    --accent: #e3993c;
+
+    --r-milspec: #4b69ff;
+    --r-restricted: #8847ff;
+    --r-classified: #d32ce6;
+    --r-covert: #eb4b4b;
+    --r-knife: #c9a227;
+    --r-container: #7c8798;
+
+    --radius: 4px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { color-scheme: dark; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(227, 153, 60, 0.05), transparent 45%),
+      radial-gradient(circle at 85% 15%, rgba(136, 71, 255, 0.05), transparent 40%);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 40px 24px 64px;
+  }
+
+  header.page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    border-bottom: 1px solid var(--panel-border);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+
+  .wordmark {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: clamp(28px, 4vw, 38px);
+    letter-spacing: 0.01em;
+    margin: 0 0 6px;
+  }
+
+  .wordmark span { color: var(--accent); }
+
+  .tagline {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 15px;
+    max-width: 46ch;
+  }
+
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    flex-wrap: wrap;
+  }
+
+  .status .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4caf6b;
+    flex-shrink: 0;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+
+  .status strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .sort-group {
+    display: inline-flex;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 3px;
+    gap: 2px;
+  }
+
+  .sort-group button {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: var(--text-dim);
+    font-family: inherit;
+    font-size: 13px;
+    padding: 7px 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .sort-group button:hover { color: var(--text); }
+
+  .sort-group button.active {
+    background: var(--accent);
+    color: #14171c;
+    font-weight: 600;
+  }
+
+  .sort-group button:focus-visible,
+  .card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .count {
+    font-size: 13px;
+    color: var(--text-faint);
+  }
+
+  .totals {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+
+  .totals .label {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .totals .value {
+    font-size: 20px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 14px;
+    min-height: 120px;
+  }
+
+  .card {
+    position: relative;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-left: 3px solid var(--rarity-color, var(--text-faint));
+    border-radius: var(--radius);
+    padding: 16px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+  .card:hover {
+    background: var(--panel-hover);
+    transform: translateY(-1px);
+  }
+
+  .card.stale { opacity: 0.55; }
+
+  .card .category {
+    font-size: 12px;
+    color: var(--text-faint);
+  }
+
+  .card .name {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .card .wear {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: -6px;
+  }
+
+  .card .rarity {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--text-dim);
+  }
+
+  .card .rarity .rdot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--rarity-color, var(--text-faint));
+    flex-shrink: 0;
+  }
+
+  .card .price-row {
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid var(--panel-border);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .card .price {
+    font-size: 24px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  .card .price-label {
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+
+  .empty-state, .error-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--panel-border);
+    font-size: 13px;
+    color: var(--text-faint);
+    line-height: 1.6;
+  }
+
+  footer p { margin: 0 0 6px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card { transition: none; }
+    .status .dot { animation: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-head">
+    <div>
+      <p class="wordmark">My<span>Inventory</span></p>
+      <p class="tagline">Your CS2 items and their lowest listed price on the Steam Community Market, in EUR.</p>
+    </div>
+    <div class="status" id="status">
+      <span class="dot"></span>
+      <span>Auto-updating, last refreshed <strong id="refreshed-at">loading…</strong></span>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <div class="sort-group" role="group" aria-label="Sort items">
+      <button type="button" data-sort="price-desc" class="active">Price: high to low</button>
+      <button type="button" data-sort="price-asc">Price: low to high</button>
+      <button type="button" data-sort="name">Name</button>
+    </div>
+    <div class="count" id="count"></div>
+  </div>
+
+  <div class="totals">
+    <span class="label">Combined value:</span>
+    <span class="value" id="total-value">—</span>
+  </div>
+
+  <div class="grid" id="grid">
+    <div class="empty-state">Loading prices…</div>
+  </div>
+
+  <footer>
+    <p>Prices come from <code>data/prices.json</code> in this repo, refreshed automatically every few hours by a GitHub Action that calls the Steam Community Market on the server side, in EUR. This page never talks to Steam directly, so there's nothing for CORS to block.</p>
+    <p>Not affiliated with Valve or Steam.</p>
+  </footer>
+
+</div>
+
+<script>
+  const RARITY_VAR = {
+    milspec: "var(--r-milspec)",
+    restricted: "var(--r-restricted)",
+    classified: "var(--r-classified)",
+    covert: "var(--r-covert)",
+    knife: "var(--r-knife)",
+    container: "var(--r-container)",
+  };
+
+  const grid = document.getElementById("grid");
+  const countEl = document.getElementById("count");
+  const refreshedAtEl = document.getElementById("refreshed-at");
+  const totalEl = document.getElementById("total-value");
+
+  let ITEMS = [];
+  let currentSort = "price-desc";
+
+  function formatEUR(value) {
+    if (value === null || value === undefined) return "—";
+    return "€" + value.toFixed(2);
+  }
+
+  function formatRelativeTime(isoString) {
+    if (!isoString) return "unknown";
+    const then = new Date(isoString);
+    const diffMs = Date.now() - then.getTime();
+    const mins = Math.round(diffMs / 60000);
+    if (mins < 1) return "just now";
+    if (mins < 60) return `${mins} min ago`;
+    const hours = Math.round(mins / 60);
+    if (hours < 48) return `${hours} hr ago`;
+    const days = Math.round(hours / 24);
+    return `${days} days ago`;
+  }
+
+  function render(items) {
+    grid.innerHTML = "";
+
+    if (items.length === 0) {
+      grid.innerHTML = `<div class="empty-state">No items to show yet — run the update workflow to fetch prices.</div>`;
+      countEl.textContent = "";
+      totalEl.textContent = "—";
+      return;
+    }
+
+    items.forEach(item => {
+      const card = document.createElement("article");
+      card.className = "card" + (item.ok === false ? " stale" : "");
+      card.style.setProperty("--rarity-color", RARITY_VAR[item.rarityKey] || "var(--text-faint)");
+      card.tabIndex = 0;
+
+      const priceLabel = item.ok === false ? "last known price" : "lowest listing";
+
+      card.innerHTML = `
+        <div class="category">${item.category}</div>
+        <h3 class="name">${item.name}</h3>
+        ${item.wear ? `<div class="wear">${item.wear}</div>` : ""}
+        <div class="rarity"><span class="rdot"></span>${item.rarity}</div>
+        <div class="price-row">
+          <span class="price">${formatEUR(item.priceValue)}</span>
+          <span class="price-label">${priceLabel}</span>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    countEl.textContent = items.length + (items.length === 1 ? " item" : " items");
+
+    const total = ITEMS.reduce((sum, i) => sum + (i.priceValue || 0), 0);
+    totalEl.textContent = formatEUR(total);
+  }
+
+  function sortItems(mode) {
+    const copy = [...ITEMS];
+    const priceOf = (i) => (i.priceValue ?? -1);
+    if (mode === "price-desc") copy.sort((a, b) => priceOf(b) - priceOf(a));
+    if (mode === "price-asc") copy.sort((a, b) => priceOf(a) - priceOf(b));
+    if (mode === "name") copy.sort((a, b) => a.name.localeCompare(b.name));
+    return copy;
+  }
+
+  document.querySelectorAll(".sort-group button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".sort-group button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentSort = btn.dataset.sort;
+      render(sortItems(currentSort));
+    });
+  });
+
+  async function load() {
+    try {
+      const res = await fetch("./data/prices.json", { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+
+      ITEMS = data.items || [];
+      refreshedAtEl.textContent = formatRelativeTime(data.generatedAt);
+      render(sortItems(currentSort));
+    } catch (err) {
+      refreshedAtEl.textContent = "unavailable";
+      grid.innerHTML = `<div class="error-state">Couldn't load data/prices.json (${err.message}).<br>If you're viewing this file locally, browsers block same-origin fetches from file:// URLs — serve it over http:// (e.g. via GitHub Pages, or "npx serve" locally) instead.</div>`;
+    }
+  }
+
+  load();
+</script>
+</body>
+</html>

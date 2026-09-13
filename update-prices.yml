@@ -1,0 +1,36 @@
+name: Update Steam Market prices
+
+on:
+  schedule:
+    - cron: "23 */6 * * *" # every 6 hours, offset from :00
+  workflow_dispatch: {} # lets you trigger it manually from the Actions tab
+
+permissions:
+  contents: write # needed so the job can commit data/prices.json back to the repo
+
+jobs:
+  update-prices:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch latest prices from Steam
+        run: node scripts/fetch-prices.mjs
+
+      - name: Commit updated prices, if any
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/prices.json
+          if git diff --cached --quiet; then
+            echo "No price changes to commit."
+          else
+            git commit -m "Update Steam Market prices"
+            git push
+          fi
