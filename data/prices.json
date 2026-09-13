@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T17:21:26.504Z",
+  "generatedAt": "2026-09-13T20:56:15.437Z",
   "currency": "EUR",
   "items": [
     {
@@ -11,11 +11,11 @@
       "rarityKey": "restricted",
       "appid": 730,
       "marketHashName": "StatTrak™ Dual Berettas | Urban Shock (Minimal Wear)",
-      "priceValue": 4.96,
-      "lowestPriceRaw": "4,96€",
-      "medianPrice": "4,30€",
-      "volume": "3",
-      "fetchedAt": "2026-09-13T17:21:14.065Z",
+      "priceValue": 5.02,
+      "lowestPriceRaw": "5,02€",
+      "medianPrice": "4,97€",
+      "volume": "2",
+      "fetchedAt": "2026-09-13T20:56:02.985Z",
       "ok": true
     },
     {
@@ -29,9 +29,9 @@
       "marketHashName": "StatTrak™ Dual Berettas | Hydro Strike (Minimal Wear)",
       "priceValue": 5.09,
       "lowestPriceRaw": "5,09€",
-      "medianPrice": "5,46€",
-      "volume": "6",
-      "fetchedAt": "2026-09-13T17:21:17.187Z",
+      "medianPrice": "5,50€",
+      "volume": "7",
+      "fetchedAt": "2026-09-13T20:56:06.096Z",
       "ok": true
     },
     {
@@ -43,11 +43,11 @@
       "rarityKey": "restricted",
       "appid": 730,
       "marketHashName": "StatTrak™ SG 553 | Tiger Moth (Minimal Wear)",
-      "priceValue": 3.77,
-      "lowestPriceRaw": "3,77€",
-      "medianPrice": "3,59€",
-      "volume": "3",
-      "fetchedAt": "2026-09-13T17:21:20.291Z",
+      "priceValue": 4.27,
+      "lowestPriceRaw": "4,27€",
+      "medianPrice": "3,99€",
+      "volume": "4",
+      "fetchedAt": "2026-09-13T20:56:09.208Z",
       "ok": true
     },
     {
@@ -59,11 +59,11 @@
       "rarityKey": "restricted",
       "appid": 730,
       "marketHashName": "StatTrak™ SCAR-20 | Powercore (Minimal Wear)",
-      "priceValue": 2.64,
-      "lowestPriceRaw": "2,64€",
+      "priceValue": 2.62,
+      "lowestPriceRaw": "2,62€",
       "medianPrice": "2,67€",
       "volume": "5",
-      "fetchedAt": "2026-09-13T17:21:23.408Z",
+      "fetchedAt": "2026-09-13T20:56:12.310Z",
       "ok": true
     },
     {
@@ -75,11 +75,11 @@
       "rarityKey": "restricted",
       "appid": 730,
       "marketHashName": "StatTrak™ P250 | Cyber Shell (Factory New)",
-      "priceValue": 5.44,
-      "lowestPriceRaw": "5,44€",
-      "medianPrice": "4,50€",
-      "volume": "3",
-      "fetchedAt": "2026-09-13T17:21:26.504Z",
+      "priceValue": 5.65,
+      "lowestPriceRaw": "5,65€",
+      "medianPrice": "5,45€",
+      "volume": "4",
+      "fetchedAt": "2026-09-13T20:56:15.437Z",
       "ok": true
     }
   ]
