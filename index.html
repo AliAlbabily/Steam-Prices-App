@@ -103,6 +103,11 @@
     50% { opacity: 0.35; }
   }
 
+  .status .dot.warn {
+    background: var(--r-covert);
+    animation: none;
+  }
+
   .status strong {
     color: var(--text);
     font-weight: 600;
@@ -208,6 +213,25 @@
 
   .card.stale { opacity: 0.55; }
 
+  .card .thumb {
+    width: 100%;
+    height: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid var(--panel-border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .card .thumb img {
+    max-width: 88%;
+    max-height: 88%;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.45));
+  }
+
   .card .category {
     font-size: 12px;
     color: var(--text-faint);
@@ -297,8 +321,8 @@
       <p class="tagline">Your CS2 items and their lowest listed price on the Steam Community Market, in EUR.</p>
     </div>
     <div class="status" id="status">
-      <span class="dot"></span>
-      <span>Auto-updating, last refreshed <strong id="refreshed-at">loading…</strong></span>
+      <span class="dot" id="status-dot"></span>
+      <span><span id="status-label">Auto-updating, last refreshed</span> <strong id="refreshed-at">loading…</strong></span>
     </div>
   </header>
 
@@ -322,7 +346,7 @@
 
   <footer>
     <p>Prices come from <code>data/prices.json</code> in this repo, refreshed automatically every few hours by a GitHub Action that calls the Steam Community Market on the server side, in EUR. This page never talks to Steam directly, so there's nothing for CORS to block.</p>
-    <p>Not affiliated with Valve or Steam.</p>
+    <p>Item images are hotlinked from Steam's own CDN. Not affiliated with Valve or Steam.</p>
   </footer>
 
 </div>
@@ -341,6 +365,8 @@
   const countEl = document.getElementById("count");
   const refreshedAtEl = document.getElementById("refreshed-at");
   const totalEl = document.getElementById("total-value");
+  const statusDotEl = document.getElementById("status-dot");
+  const statusLabelEl = document.getElementById("status-label");
 
   let ITEMS = [];
   let currentSort = "price-desc";
@@ -381,7 +407,14 @@
 
       const priceLabel = item.ok === false ? "last known price" : "lowest listing";
 
+      // If an item has no imageUrl (e.g. you added it without one), the
+      // card just skips the thumbnail — nothing breaks.
+      const thumbHtml = item.imageUrl
+        ? `<div class="thumb"><img src="${item.imageUrl}" alt="${item.name}" loading="lazy" onerror="this.parentElement.remove()"></div>`
+        : "";
+
       card.innerHTML = `
+        ${thumbHtml}
         <div class="category">${item.category}</div>
         <h3 class="name">${item.name}</h3>
         ${item.wear ? `<div class="wear">${item.wear}</div>` : ""}
@@ -425,7 +458,21 @@
       const data = await res.json();
 
       ITEMS = data.items || [];
-      refreshedAtEl.textContent = formatRelativeTime(data.generatedAt);
+
+      // Show when data was actually last fetched successfully, not just
+      // when the workflow last ran (those can differ if Steam blocked a run).
+      const displayTime = data.lastSuccessfulFetchAt || data.generatedAt;
+      refreshedAtEl.textContent = formatRelativeTime(displayTime);
+
+      if (data.runSucceeded === false) {
+        statusDotEl.classList.add("warn");
+        const failedCount = (data.totalCount || 0) - (data.successCount || 0);
+        statusLabelEl.textContent = `Last check failed for all ${failedCount} item${failedCount === 1 ? "" : "s"} — showing prices from`;
+      } else {
+        statusDotEl.classList.remove("warn");
+        statusLabelEl.textContent = "Auto-updating, last refreshed";
+      }
+
       render(sortItems(currentSort));
     } catch (err) {
       refreshedAtEl.textContent = "unavailable";

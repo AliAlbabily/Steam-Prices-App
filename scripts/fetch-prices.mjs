@@ -21,10 +21,11 @@ const PRICES_PATH = path.join(__dirname, "..", "data", "prices.json");
 
 const CURRENCY_CODE = 3; // Steam's currency id: 1 = USD, 3 = EUR
 const CURRENCY_LABEL = "EUR";
-const DELAY_MS = 3000; // pause between requests — Steam rate-limits this endpoint hard
-const MAX_RETRIES = 2;
+const DELAY_MS = 3500; // pause between items — Steam rate-limits this endpoint hard
+const MAX_RETRIES = 3; // per item, covers both 429s and generic failures/blocks
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const jitter = (base) => base + Math.floor(Math.random() * 800);
 
 // Steam formats EUR prices like "14,77€" (comma decimal, symbol trailing)
 // and USD like "$14.77" (dot decimal, symbol leading). Normalize either
@@ -48,24 +49,52 @@ async function fetchOnePrice(item, attempt = 1) {
     `&currency=${CURRENCY_CODE}` +
     `&market_hash_name=${encodeURIComponent(item.marketHashName)}`;
 
-  const res = await fetch(url, {
-    headers: {
-      "User-Agent": "Mozilla/5.0 (compatible; MarketWatchBot/1.0; +https://github.com/)",
-    },
-  });
+  let res;
+  try {
+    res = await fetch(url, {
+      headers: {
+        // A more browser-like header set — Steam is more likely to hard-block
+        // requests that look like a bare script, which cloud/CI IPs already
+        // look suspicious as-is.
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36",
+        Accept: "application/json, text/javascript, */*; q=0.01",
+        "Accept-Language": "en-US,en;q=0.9",
+        Referer: "https://steamcommunity.com/market/",
+      },
+    });
+  } catch (networkErr) {
+    // DNS failure, connection reset, timeout, etc. — worth retrying.
+    if (attempt <= MAX_RETRIES) {
+      const backoff = jitter(DELAY_MS * attempt * 2);
+      console.warn(`  network error on "${item.marketHashName}" (${networkErr.message}), retrying in ${backoff}ms`);
+      await sleep(backoff);
+      return fetchOnePrice(item, attempt + 1);
+    }
+    throw networkErr;
+  }
 
-  if (res.status === 429 && attempt <= MAX_RETRIES) {
-    const backoff = DELAY_MS * attempt * 3;
-    console.warn(`  rate limited on "${item.marketHashName}", waiting ${backoff}ms and retrying`);
+  if ((res.status === 429 || res.status === 403) && attempt <= MAX_RETRIES) {
+    const backoff = jitter(DELAY_MS * attempt * 3);
+    console.warn(`  HTTP ${res.status} on "${item.marketHashName}" (rate limited or blocked), waiting ${backoff}ms and retrying`);
     await sleep(backoff);
     return fetchOnePrice(item, attempt + 1);
   }
 
   if (!res.ok) {
-    throw new Error(`HTTP ${res.status}`);
+    // Grab a snippet of the response so a failure in the Action logs is
+    // actually diagnosable (e.g. shows a Cloudflare block page vs real 500).
+    const bodySnippet = (await res.text().catch(() => "")).slice(0, 200);
+    throw new Error(`HTTP ${res.status}${bodySnippet ? ` — body: ${bodySnippet}` : ""}`);
   }
 
-  const data = await res.json();
+  let data;
+  try {
+    data = await res.json();
+  } catch {
+    throw new Error("Response wasn't valid JSON (likely an interstitial/block page, not real data)");
+  }
+
   if (!data || data.success !== true) {
     throw new Error("Steam returned success=false (item may be delisted or name is wrong)");
   }
@@ -112,29 +141,51 @@ async function main() {
         lowestPriceRaw: prev?.lowestPriceRaw ?? null,
         medianPrice: prev?.medianPrice ?? null,
         volume: prev?.volume ?? null,
-        fetchedAt: prev?.fetchedAt ?? null,
+        fetchedAt: prev?.fetchedAt ?? null, // keeps the timestamp of when this price was actually true
         ok: false,
       });
     }
 
     if (item !== items[items.length - 1]) {
-      await sleep(DELAY_MS);
+      await sleep(jitter(DELAY_MS));
     }
   }
 
+  const successCount = results.filter((r) => r.ok).length;
+
+  // The most recent moment ANY item was actually, successfully fetched —
+  // this is what "last refreshed" on the page should show, as opposed to
+  // "generatedAt" below, which is just when this script last ran (success
+  // or not).
+  const lastSuccessfulFetchAt = results.reduce((latest, r) => {
+    if (!r.fetchedAt) return latest;
+    return !latest || r.fetchedAt > latest ? r.fetchedAt : latest;
+  }, null);
+
   const output = {
     generatedAt: new Date().toISOString(),
+    lastSuccessfulFetchAt,
+    runSucceeded: successCount === results.length,
+    successCount,
+    totalCount: results.length,
     currency: CURRENCY_LABEL,
     items: results,
   };
 
   await writeFile(PRICES_PATH, JSON.stringify(output, null, 2) + "\n");
 
-  const failures = results.filter((r) => !r.ok).length;
   console.log(
-    `\nWrote ${results.length} items to data/prices.json` +
-      (failures ? ` (${failures} used fallback/previous values)` : "")
+    `\nWrote ${results.length} items to data/prices.json ` +
+      `(${successCount}/${results.length} fetched successfully this run)`
   );
+
+  // Exit non-zero if EVERYTHING failed — makes the Action show a red X in
+  // that case, instead of a misleading green checkmark for a run that
+  // didn't actually get any real data.
+  if (successCount === 0 && results.length > 0) {
+    console.error("\nEvery item failed this run — check the logs above for the actual Steam response.");
+    process.exitCode = 1;
+  }
 }
 
 main().catch((err) => {
