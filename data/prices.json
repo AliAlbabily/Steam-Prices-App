@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T20:56:15.437Z",
+  "generatedAt": "2026-09-14T05:06:44.395Z",
   "currency": "EUR",
   "items": [
     {
@@ -14,8 +14,8 @@
       "priceValue": 5.02,
       "lowestPriceRaw": "5,02€",
       "medianPrice": "4,97€",
-      "volume": "2",
-      "fetchedAt": "2026-09-13T20:56:02.985Z",
+      "volume": "1",
+      "fetchedAt": "2026-09-14T05:06:31.940Z",
       "ok": true
     },
     {
@@ -27,11 +27,11 @@
       "rarityKey": "restricted",
       "appid": 730,
       "marketHashName": "StatTrak™ Dual Berettas | Hydro Strike (Minimal Wear)",
-      "priceValue": 5.09,
-      "lowestPriceRaw": "5,09€",
-      "medianPrice": "5,50€",
-      "volume": "7",
-      "fetchedAt": "2026-09-13T20:56:06.096Z",
+      "priceValue": 5.36,
+      "lowestPriceRaw": "5,36€",
+      "medianPrice": "5,09€",
+      "volume": "8",
+      "fetchedAt": "2026-09-14T05:06:35.051Z",
       "ok": true
     },
     {
@@ -47,7 +47,7 @@
       "lowestPriceRaw": "4,27€",
       "medianPrice": "3,99€",
       "volume": "4",
-      "fetchedAt": "2026-09-13T20:56:09.208Z",
+      "fetchedAt": "2026-09-14T05:06:38.149Z",
       "ok": true
     },
     {
@@ -62,8 +62,8 @@
       "priceValue": 2.62,
       "lowestPriceRaw": "2,62€",
       "medianPrice": "2,67€",
-      "volume": "5",
-      "fetchedAt": "2026-09-13T20:56:12.310Z",
+      "volume": "3",
+      "fetchedAt": "2026-09-14T05:06:41.303Z",
       "ok": true
     },
     {
@@ -79,7 +79,7 @@
       "lowestPriceRaw": "5,65€",
       "medianPrice": "5,45€",
       "volume": "4",
-      "fetchedAt": "2026-09-13T20:56:15.437Z",
+      "fetchedAt": "2026-09-14T05:06:44.395Z",
       "ok": true
     }
   ]
