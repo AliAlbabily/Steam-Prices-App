@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T05:06:44.395Z",
+  "generatedAt": "2026-09-14T13:02:52.455Z",
   "currency": "EUR",
   "items": [
     {
@@ -16,7 +16,7 @@
       "medianPrice": "4,97€",
       "volume": "1",
       "fetchedAt": "2026-09-14T05:06:31.940Z",
-      "ok": true
+      "ok": false
     },
     {
       "id": "db-hydro-strike-mw",
@@ -32,7 +32,7 @@
       "medianPrice": "5,09€",
       "volume": "8",
       "fetchedAt": "2026-09-14T05:06:35.051Z",
-      "ok": true
+      "ok": false
     },
     {
       "id": "sg553-tiger-moth-mw",
@@ -48,7 +48,7 @@
       "medianPrice": "3,99€",
       "volume": "4",
       "fetchedAt": "2026-09-14T05:06:38.149Z",
-      "ok": true
+      "ok": false
     },
     {
       "id": "scar20-powercore-mw",
@@ -64,7 +64,7 @@
       "medianPrice": "2,67€",
       "volume": "3",
       "fetchedAt": "2026-09-14T05:06:41.303Z",
-      "ok": true
+      "ok": false
     },
     {
       "id": "p250-cyber-shell-fn",
@@ -80,7 +80,7 @@
       "medianPrice": "5,45€",
       "volume": "4",
       "fetchedAt": "2026-09-14T05:06:44.395Z",
-      "ok": true
+      "ok": false
     }
   ]
 }
