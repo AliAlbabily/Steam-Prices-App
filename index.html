@@ -163,6 +163,109 @@
     color: var(--text-faint);
   }
 
+  .manage-btn {
+    appearance: none;
+    border: 1px solid var(--panel-border);
+    background: var(--panel);
+    color: var(--text-dim);
+    font-family: inherit;
+    font-size: 13px;
+    padding: 7px 12px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .manage-btn:hover { color: var(--text); border-color: var(--accent); }
+
+  .manage-btn.active {
+    background: var(--accent);
+    color: #14171c;
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+
+  .manage-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .manage-panel {
+    display: none;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+
+  .manage-panel.open { display: block; }
+
+  .manage-panel .manage-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .manage-panel .manage-title {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .manage-panel .manage-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .manage-panel .manage-actions button {
+    appearance: none;
+    border: none;
+    background: none;
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 12.5px;
+    cursor: pointer;
+    padding: 2px 4px;
+  }
+
+  .manage-panel .manage-actions button:hover { text-decoration: underline; }
+
+  .manage-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 4px 16px;
+  }
+
+  .manage-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 4px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+
+  .manage-item:hover { background: var(--panel-hover); }
+
+  .manage-item input {
+    accent-color: var(--accent);
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .manage-item .manage-item-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .totals {
     display: flex;
     align-items: baseline;
@@ -210,8 +313,6 @@
     background: var(--panel-hover);
     transform: translateY(-1px);
   }
-
-  .card.stale { opacity: 0.55; }
 
   .card .thumb {
     width: 100%;
@@ -287,6 +388,14 @@
     color: var(--text-faint);
   }
 
+  .card .price-label.status-ok {
+    color: #4caf6b;
+  }
+
+  .card .price-label.status-fail {
+    color: var(--r-covert);
+  }
+
   .empty-state, .error-state {
     grid-column: 1 / -1;
     text-align: center;
@@ -332,7 +441,21 @@
       <button type="button" data-sort="price-asc">Price: low to high</button>
       <button type="button" data-sort="name">Name</button>
     </div>
-    <div class="count" id="count"></div>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <span class="count" id="count"></span>
+      <button type="button" class="manage-btn" id="manage-btn" aria-expanded="false">Manage items</button>
+    </div>
+  </div>
+
+  <div class="manage-panel" id="manage-panel">
+    <div class="manage-head">
+      <span class="manage-title">Choose which items show below</span>
+      <div class="manage-actions">
+        <button type="button" id="select-all-btn">Select all</button>
+        <button type="button" id="select-none-btn">Deselect all</button>
+      </div>
+    </div>
+    <div class="manage-list" id="manage-list"></div>
   </div>
 
   <div class="totals">
@@ -367,9 +490,46 @@
   const totalEl = document.getElementById("total-value");
   const statusDotEl = document.getElementById("status-dot");
   const statusLabelEl = document.getElementById("status-label");
+  const manageBtn = document.getElementById("manage-btn");
+  const managePanel = document.getElementById("manage-panel");
+  const manageList = document.getElementById("manage-list");
+  const selectAllBtn = document.getElementById("select-all-btn");
+  const selectNoneBtn = document.getElementById("select-none-btn");
 
   let ITEMS = [];
   let currentSort = "price-desc";
+
+  // --- Which items are hidden -----------------------------------------
+  // We store IDs you've explicitly hidden, not the ones you've kept — that
+  // way, if you add a new item to items.json later, it shows up by default
+  // instead of silently staying hidden until you remember to enable it.
+  const STORAGE_KEY = "steam-watch-hidden-ids";
+
+  function loadHiddenIds() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? new Set(JSON.parse(raw)) : new Set();
+    } catch {
+      return new Set(); // corrupted or blocked storage — fail open, show everything
+    }
+  }
+
+  function saveHiddenIds(set) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...set]));
+    } catch {
+      // Storage might be unavailable (private browsing, disabled, etc).
+      // Not fatal — the page still works, it just won't remember your
+      // choices across a refresh.
+      console.warn("Couldn't save item visibility — your browser may be blocking local storage.");
+    }
+  }
+
+  let hiddenIds = loadHiddenIds();
+
+  function visibleItems() {
+    return ITEMS.filter(i => !hiddenIds.has(i.id));
+  }
 
   function formatEUR(value) {
     if (value === null || value === undefined) return "—";
@@ -392,20 +552,28 @@
   function render(items) {
     grid.innerHTML = "";
 
-    if (items.length === 0) {
+    if (ITEMS.length === 0) {
       grid.innerHTML = `<div class="empty-state">No items to show yet — run the update workflow to fetch prices.</div>`;
       countEl.textContent = "";
       totalEl.textContent = "—";
       return;
     }
 
+    if (items.length === 0) {
+      grid.innerHTML = `<div class="empty-state">Nothing selected — click "Manage items" to choose what to show.</div>`;
+      countEl.textContent = "0 items";
+      totalEl.textContent = formatEUR(0);
+      return;
+    }
+
     items.forEach(item => {
       const card = document.createElement("article");
-      card.className = "card" + (item.ok === false ? " stale" : "");
+      card.className = "card";
       card.style.setProperty("--rarity-color", RARITY_VAR[item.rarityKey] || "var(--text-faint)");
       card.tabIndex = 0;
 
       const priceLabel = item.ok === false ? "last known price" : "lowest listing";
+      const priceLabelClass = item.ok === false ? "status-fail" : "status-ok";
 
       // If an item has no imageUrl (e.g. you added it without one), the
       // card just skips the thumbnail — nothing breaks.
@@ -421,7 +589,7 @@
         <div class="rarity"><span class="rdot"></span>${item.rarity}</div>
         <div class="price-row">
           <span class="price">${formatEUR(item.priceValue)}</span>
-          <span class="price-label">${priceLabel}</span>
+          <span class="price-label ${priceLabelClass}">${priceLabel}</span>
         </div>
       `;
       grid.appendChild(card);
@@ -429,12 +597,12 @@
 
     countEl.textContent = items.length + (items.length === 1 ? " item" : " items");
 
-    const total = ITEMS.reduce((sum, i) => sum + (i.priceValue || 0), 0);
+    const total = items.reduce((sum, i) => sum + (i.priceValue || 0), 0);
     totalEl.textContent = formatEUR(total);
   }
 
-  function sortItems(mode) {
-    const copy = [...ITEMS];
+  function sortItems(items, mode) {
+    const copy = [...items];
     const priceOf = (i) => (i.priceValue ?? -1);
     if (mode === "price-desc") copy.sort((a, b) => priceOf(b) - priceOf(a));
     if (mode === "price-asc") copy.sort((a, b) => priceOf(a) - priceOf(b));
@@ -442,13 +610,69 @@
     return copy;
   }
 
+  function renderCurrent() {
+    render(sortItems(visibleItems(), currentSort));
+  }
+
   document.querySelectorAll(".sort-group button").forEach(btn => {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".sort-group button").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       currentSort = btn.dataset.sort;
-      render(sortItems(currentSort));
+      renderCurrent();
     });
+  });
+
+  // --- Manage panel ------------------------------------------------------
+  function renderManageList() {
+    manageList.innerHTML = "";
+    const sorted = [...ITEMS].sort((a, b) => a.name.localeCompare(b.name));
+
+    sorted.forEach(item => {
+      const label = document.createElement("label");
+      label.className = "manage-item";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = !hiddenIds.has(item.id);
+      checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+          hiddenIds.delete(item.id);
+        } else {
+          hiddenIds.add(item.id);
+        }
+        saveHiddenIds(hiddenIds);
+        renderCurrent();
+      });
+
+      const nameSpan = document.createElement("span");
+      nameSpan.className = "manage-item-name";
+      nameSpan.textContent = item.name + (item.wear ? ` (${item.wear})` : "");
+
+      label.appendChild(checkbox);
+      label.appendChild(nameSpan);
+      manageList.appendChild(label);
+    });
+  }
+
+  manageBtn.addEventListener("click", () => {
+    const isOpen = managePanel.classList.toggle("open");
+    manageBtn.classList.toggle("active", isOpen);
+    manageBtn.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  selectAllBtn.addEventListener("click", () => {
+    hiddenIds.clear();
+    saveHiddenIds(hiddenIds);
+    renderManageList();
+    renderCurrent();
+  });
+
+  selectNoneBtn.addEventListener("click", () => {
+    hiddenIds = new Set(ITEMS.map(i => i.id));
+    saveHiddenIds(hiddenIds);
+    renderManageList();
+    renderCurrent();
   });
 
   async function load() {
@@ -473,7 +697,8 @@
         statusLabelEl.textContent = "Auto-updating, last refreshed";
       }
 
-      render(sortItems(currentSort));
+      renderManageList();
+      renderCurrent();
     } catch (err) {
       refreshedAtEl.textContent = "unavailable";
       grid.innerHTML = `<div class="error-state">Couldn't load data/prices.json (${err.message}).<br>If you're viewing this file locally, browsers block same-origin fetches from file:// URLs — serve it over http:// (e.g. via GitHub Pages, or "npx serve" locally) instead.</div>`;
