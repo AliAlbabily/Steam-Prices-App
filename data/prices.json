@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-14T13:02:52.455Z",
-  "lastSuccessfulFetchAt": "2026-09-14T05:06:44.395Z",
-  "runSucceeded": false,
-  "successCount": 0,
+  "generatedAt": "2026-09-15T17:07:33.212Z",
+  "lastSuccessfulFetchAt": "2026-09-15T17:07:33.212Z",
+  "runSucceeded": true,
+  "successCount": 5,
   "totalCount": 5,
   "currency": "EUR",
   "items": [
@@ -16,12 +16,12 @@
       "appid": 730,
       "marketHashName": "StatTrak™ Dual Berettas | Urban Shock (Minimal Wear)",
       "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL0kp_0-B1Y-s2rZK15JeOsG3WSwOBlpO57Qha_nBovp3PQzI6pc3iRZ1cjC5dzQe4CsxPtwdHjMevq41CLjIpMm3_5jypN7Cxp_a9cBoxgoAoS",
-      "priceValue": 5.02,
-      "lowestPriceRaw": "5,02€",
-      "medianPrice": "4,97€",
-      "volume": "1",
-      "fetchedAt": "2026-09-14T05:06:31.940Z",
-      "ok": false
+      "priceValue": 5.53,
+      "lowestPriceRaw": "5,53€",
+      "medianPrice": "3,47€",
+      "volume": "5",
+      "fetchedAt": "2026-09-15T17:07:17.234Z",
+      "ok": true
     },
     {
       "id": "db-hydro-strike-mw",
@@ -33,12 +33,12 @@
       "appid": 730,
       "marketHashName": "StatTrak™ Dual Berettas | Hydro Strike (Minimal Wear)",
       "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL0kp_0-B1f-vOiV6FhKeSWMW-Jxfx5j_J9XSC4kCIrujqNjsGgeHrGa1B2W5t1Q7NetkOwk4C2Ybzq4FDWjI0TzS6viilLv3tp6rwLT-N7rWtjCU_P",
-      "priceValue": 5.36,
-      "lowestPriceRaw": "5,36€",
-      "medianPrice": "5,09€",
-      "volume": "8",
-      "fetchedAt": "2026-09-14T05:06:35.051Z",
-      "ok": false
+      "priceValue": 5.3,
+      "lowestPriceRaw": "5,30€",
+      "medianPrice": "6,48€",
+      "volume": "3",
+      "fetchedAt": "2026-09-15T17:07:21.292Z",
+      "ok": true
     },
     {
       "id": "sg553-tiger-moth-mw",
@@ -50,12 +50,12 @@
       "appid": 730,
       "marketHashName": "StatTrak™ SG 553 | Tiger Moth (Minimal Wear)",
       "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLimcO1qx1c_M29b_E4c8-HB2CV09F7v_VhcCW6khUz_TnWn9n7cyqRPQ52DpN3QLEPshjrw9zlY-jjs1bWioMQxSj8hyxJu3l1o7FVwqXqqnE",
-      "priceValue": 4.27,
-      "lowestPriceRaw": "4,27€",
-      "medianPrice": "3,99€",
-      "volume": "4",
-      "fetchedAt": "2026-09-14T05:06:38.149Z",
-      "ok": false
+      "priceValue": 4.25,
+      "lowestPriceRaw": "4,25€",
+      "medianPrice": "4,16€",
+      "volume": "1",
+      "fetchedAt": "2026-09-15T17:07:25.327Z",
+      "ok": true
     },
     {
       "id": "scar20-powercore-mw",
@@ -67,12 +67,12 @@
       "appid": 730,
       "marketHashName": "StatTrak™ SCAR-20 | Powercore (Minimal Wear)",
       "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLinZfyr3Jk6OGRe6dsMqLDMXef1utks-57Sha_nBovp3OAzd2qIy_DPVMkXMEiE7UL5ES-l9yyP76wswWP3Y1Nyyn2i35L6S5s_a9cBj_cXeyl",
-      "priceValue": 2.62,
-      "lowestPriceRaw": "2,62€",
-      "medianPrice": "2,67€",
+      "priceValue": 2.39,
+      "lowestPriceRaw": "2,39€",
+      "medianPrice": "2,65€",
       "volume": "3",
-      "fetchedAt": "2026-09-14T05:06:41.303Z",
-      "ok": false
+      "fetchedAt": "2026-09-15T17:07:29.255Z",
+      "ok": true
     },
     {
       "id": "p250-cyber-shell-fn",
@@ -84,12 +84,12 @@
       "appid": 730,
       "marketHashName": "StatTrak™ P250 | Cyber Shell (Factory New)",
       "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhzMOwwiVI0OL8PfRSI-mRC3WDyet6vN5lRi67gVMl6mzUm9n8IHzCaQUmA5Z3RLJb4xC9m4bhMbzn7lOL2Y5Am3j73HxI8G81tOdaiAQT",
-      "priceValue": 5.65,
-      "lowestPriceRaw": "5,65€",
-      "medianPrice": "5,45€",
-      "volume": "4",
-      "fetchedAt": "2026-09-14T05:06:44.395Z",
-      "ok": false
+      "priceValue": 5.24,
+      "lowestPriceRaw": "5,24€",
+      "medianPrice": "4,13€",
+      "volume": "5",
+      "fetchedAt": "2026-09-15T17:07:33.212Z",
+      "ok": true
     }
   ]
 }
