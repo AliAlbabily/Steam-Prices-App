@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-22T05:08:34.406Z",
-  "lastSuccessfulFetchAt": "2026-09-22T05:08:34.406Z",
+  "generatedAt": "2026-09-22T17:03:19.871Z",
+  "lastSuccessfulFetchAt": "2026-09-22T17:03:19.871Z",
   "runSucceeded": true,
   "successCount": 5,
   "totalCount": 5,
@@ -16,11 +16,11 @@
       "appid": 730,
       "marketHashName": "StatTrak™ Dual Berettas | Urban Shock (Minimal Wear)",
       "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL0kp_0-B1Y-s2rZK15JeOsG3WSwOBlpO57Qha_nBovp3PQzI6pc3iRZ1cjC5dzQe4CsxPtwdHjMevq41CLjIpMm3_5jypN7Cxp_a9cBoxgoAoS",
-      "priceValue": 5.14,
-      "lowestPriceRaw": "5,14€",
-      "medianPrice": "5,48€",
-      "volume": "4",
-      "fetchedAt": "2026-09-22T05:08:18.389Z",
+      "priceValue": 5.09,
+      "lowestPriceRaw": "5,09€",
+      "medianPrice": "5,16€",
+      "volume": "3",
+      "fetchedAt": "2026-09-22T17:03:02.844Z",
       "ok": true
     },
     {
@@ -33,11 +33,11 @@
       "appid": 730,
       "marketHashName": "StatTrak™ Dual Berettas | Hydro Strike (Minimal Wear)",
       "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL0kp_0-B1f-vOiV6FhKeSWMW-Jxfx5j_J9XSC4kCIrujqNjsGgeHrGa1B2W5t1Q7NetkOwk4C2Ybzq4FDWjI0TzS6viilLv3tp6rwLT-N7rWtjCU_P",
-      "priceValue": 5.4,
-      "lowestPriceRaw": "5,40€",
+      "priceValue": 5,
+      "lowestPriceRaw": "5,--€",
       "medianPrice": "5,45€",
-      "volume": "4",
-      "fetchedAt": "2026-09-22T05:08:22.733Z",
+      "volume": "2",
+      "fetchedAt": "2026-09-22T17:03:06.828Z",
       "ok": true
     },
     {
@@ -52,9 +52,9 @@
       "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLimcO1qx1c_M29b_E4c8-HB2CV09F7v_VhcCW6khUz_TnWn9n7cyqRPQ52DpN3QLEPshjrw9zlY-jjs1bWioMQxSj8hyxJu3l1o7FVwqXqqnE",
       "priceValue": 4.02,
       "lowestPriceRaw": "4,02€",
-      "medianPrice": "4,37€",
-      "volume": "1",
-      "fetchedAt": "2026-09-22T05:08:26.665Z",
+      "medianPrice": "3,73€",
+      "volume": "2",
+      "fetchedAt": "2026-09-22T17:03:11.247Z",
       "ok": true
     },
     {
@@ -70,8 +70,8 @@
       "priceValue": 2.61,
       "lowestPriceRaw": "2,61€",
       "medianPrice": "2,44€",
-      "volume": "2",
-      "fetchedAt": "2026-09-22T05:08:30.690Z",
+      "volume": "1",
+      "fetchedAt": "2026-09-22T17:03:15.571Z",
       "ok": true
     },
     {
@@ -84,11 +84,11 @@
       "appid": 730,
       "marketHashName": "StatTrak™ P250 | Cyber Shell (Factory New)",
       "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhzMOwwiVI0OL8PfRSI-mRC3WDyet6vN5lRi67gVMl6mzUm9n8IHzCaQUmA5Z3RLJb4xC9m4bhMbzn7lOL2Y5Am3j73HxI8G81tOdaiAQT",
-      "priceValue": 5.23,
-      "lowestPriceRaw": "5,23€",
+      "priceValue": 4.66,
+      "lowestPriceRaw": "4,66€",
       "medianPrice": null,
       "volume": null,
-      "fetchedAt": "2026-09-22T05:08:34.406Z",
+      "fetchedAt": "2026-09-22T17:03:19.871Z",
       "ok": true
     }
   ]
