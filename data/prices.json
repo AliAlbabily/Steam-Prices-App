@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-22T17:03:19.871Z",
-  "lastSuccessfulFetchAt": "2026-09-22T17:03:19.871Z",
-  "runSucceeded": true,
-  "successCount": 5,
+  "generatedAt": "2026-09-23T04:55:26.281Z",
+  "lastSuccessfulFetchAt": "2026-09-23T04:55:26.281Z",
+  "runSucceeded": false,
+  "successCount": 4,
   "totalCount": 5,
   "currency": "EUR",
   "items": [
@@ -16,11 +16,11 @@
       "appid": 730,
       "marketHashName": "StatTrak™ Dual Berettas | Urban Shock (Minimal Wear)",
       "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL0kp_0-B1Y-s2rZK15JeOsG3WSwOBlpO57Qha_nBovp3PQzI6pc3iRZ1cjC5dzQe4CsxPtwdHjMevq41CLjIpMm3_5jypN7Cxp_a9cBoxgoAoS",
-      "priceValue": 5.09,
-      "lowestPriceRaw": "5,09€",
+      "priceValue": 5.12,
+      "lowestPriceRaw": "5,12€",
       "medianPrice": "5,16€",
-      "volume": "3",
-      "fetchedAt": "2026-09-22T17:03:02.844Z",
+      "volume": "1",
+      "fetchedAt": "2026-09-23T04:53:32.727Z",
       "ok": true
     },
     {
@@ -33,11 +33,11 @@
       "appid": 730,
       "marketHashName": "StatTrak™ Dual Berettas | Hydro Strike (Minimal Wear)",
       "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL0kp_0-B1f-vOiV6FhKeSWMW-Jxfx5j_J9XSC4kCIrujqNjsGgeHrGa1B2W5t1Q7NetkOwk4C2Ybzq4FDWjI0TzS6viilLv3tp6rwLT-N7rWtjCU_P",
-      "priceValue": 5,
-      "lowestPriceRaw": "5,--€",
-      "medianPrice": "5,45€",
+      "priceValue": 4.99,
+      "lowestPriceRaw": "4,99€",
+      "medianPrice": "4,90€",
       "volume": "2",
-      "fetchedAt": "2026-09-22T17:03:06.828Z",
+      "fetchedAt": "2026-09-23T04:53:36.569Z",
       "ok": true
     },
     {
@@ -52,9 +52,9 @@
       "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLimcO1qx1c_M29b_E4c8-HB2CV09F7v_VhcCW6khUz_TnWn9n7cyqRPQ52DpN3QLEPshjrw9zlY-jjs1bWioMQxSj8hyxJu3l1o7FVwqXqqnE",
       "priceValue": 4.02,
       "lowestPriceRaw": "4,02€",
-      "medianPrice": "3,73€",
+      "medianPrice": "4,05€",
       "volume": "2",
-      "fetchedAt": "2026-09-22T17:03:11.247Z",
+      "fetchedAt": "2026-09-23T04:53:40.555Z",
       "ok": true
     },
     {
@@ -72,7 +72,7 @@
       "medianPrice": "2,44€",
       "volume": "1",
       "fetchedAt": "2026-09-22T17:03:15.571Z",
-      "ok": true
+      "ok": false
     },
     {
       "id": "p250-cyber-shell-fn",
@@ -88,7 +88,7 @@
       "lowestPriceRaw": "4,66€",
       "medianPrice": null,
       "volume": null,
-      "fetchedAt": "2026-09-22T17:03:19.871Z",
+      "fetchedAt": "2026-09-23T04:55:26.281Z",
       "ok": true
     }
   ]
