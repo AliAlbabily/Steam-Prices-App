@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-24T05:02:17.712Z",
-  "lastSuccessfulFetchAt": "2026-09-24T05:02:17.712Z",
+  "generatedAt": "2026-09-24T17:20:54.899Z",
+  "lastSuccessfulFetchAt": "2026-09-24T17:20:54.899Z",
   "runSucceeded": true,
   "successCount": 5,
   "totalCount": 5,
@@ -20,7 +20,7 @@
       "lowestPriceRaw": "5,08€",
       "medianPrice": null,
       "volume": null,
-      "fetchedAt": "2026-09-24T05:02:01.030Z",
+      "fetchedAt": "2026-09-24T17:20:05.362Z",
       "ok": true
     },
     {
@@ -33,11 +33,11 @@
       "appid": 730,
       "marketHashName": "StatTrak™ Dual Berettas | Hydro Strike (Minimal Wear)",
       "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL0kp_0-B1f-vOiV6FhKeSWMW-Jxfx5j_J9XSC4kCIrujqNjsGgeHrGa1B2W5t1Q7NetkOwk4C2Ybzq4FDWjI0TzS6viilLv3tp6rwLT-N7rWtjCU_P",
-      "priceValue": 4.97,
-      "lowestPriceRaw": "4,97€",
-      "medianPrice": "4,82€",
-      "volume": "7",
-      "fetchedAt": "2026-09-24T05:02:05.326Z",
+      "priceValue": 4.79,
+      "lowestPriceRaw": "4,79€",
+      "medianPrice": "5,01€",
+      "volume": "4",
+      "fetchedAt": "2026-09-24T17:20:42.253Z",
       "ok": true
     },
     {
@@ -50,11 +50,11 @@
       "appid": 730,
       "marketHashName": "StatTrak™ SG 553 | Tiger Moth (Minimal Wear)",
       "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLimcO1qx1c_M29b_E4c8-HB2CV09F7v_VhcCW6khUz_TnWn9n7cyqRPQ52DpN3QLEPshjrw9zlY-jjs1bWioMQxSj8hyxJu3l1o7FVwqXqqnE",
-      "priceValue": 3.74,
-      "lowestPriceRaw": "3,74€",
-      "medianPrice": "3,71€",
-      "volume": "4",
-      "fetchedAt": "2026-09-24T05:02:09.569Z",
+      "priceValue": 4.4,
+      "lowestPriceRaw": "4,40€",
+      "medianPrice": "4,40€",
+      "volume": "6",
+      "fetchedAt": "2026-09-24T17:20:46.682Z",
       "ok": true
     },
     {
@@ -69,9 +69,9 @@
       "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLinZfyr3Jk6OGRe6dsMqLDMXef1utks-57Sha_nBovp3OAzd2qIy_DPVMkXMEiE7UL5ES-l9yyP76wswWP3Y1Nyyn2i35L6S5s_a9cBj_cXeyl",
       "priceValue": 2.62,
       "lowestPriceRaw": "2,62€",
-      "medianPrice": "2,63€",
+      "medianPrice": "2,02€",
       "volume": "3",
-      "fetchedAt": "2026-09-24T05:02:13.776Z",
+      "fetchedAt": "2026-09-24T17:20:50.515Z",
       "ok": true
     },
     {
@@ -87,8 +87,8 @@
       "priceValue": 4.4,
       "lowestPriceRaw": "4,40€",
       "medianPrice": "5,27€",
-      "volume": "3",
-      "fetchedAt": "2026-09-24T05:02:17.712Z",
+      "volume": "1",
+      "fetchedAt": "2026-09-24T17:20:54.899Z",
       "ok": true
     }
   ]
